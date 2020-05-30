@@ -7,6 +7,6 @@ clone it
 ```
 cd directory
 
-npm start <absolute/path/to/directory>
+npm start <absolute/path/to/directory/where-duplicate-scss-are>
 
 ```
