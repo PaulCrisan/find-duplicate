@@ -62,8 +62,12 @@ const getResult = () => {
     }
   }
 
+  let flag = false;
+
   Object.values(hashObj).map((el) => {
     if (el.length > 1) {
+      flag = true;
+
       console.log(
         "\x1b[36m%s\x1b[0m",
         "Fisierele duplicat si locul lor sunt: \n"
@@ -76,7 +80,13 @@ const getResult = () => {
       console.log("\n");
     }
   });
-  return "";
+
+  flag
+    ? ""
+    : console.log(
+        "\x1b[36m%s\x1b[0m",
+        "Nu sunt fisiere duplicat in acest fisier"
+      );
 };
 
 getResult();
