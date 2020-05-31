@@ -7,7 +7,7 @@ if (process.argv.length <= 2) {
   process.exit(0);
 }
 
-const PATH = process.argv[2];
+const PATH = path.normalize(process.argv[2]);
 
 var walkSync = function (dir, filelist) {
   var path = path || require("path");
@@ -79,4 +79,4 @@ const getResult = () => {
   return "";
 };
 
-console.log(getResult());
+getResult();
