@@ -41,25 +41,13 @@ fdup <absolute/path/to/directory/where-duplicate-scss-are> [filetype-to-search-f
 or if you want to search for multiple files (no space between multiple file types):
 
 ```
-fdup <absolute/path/to/directory/where-duplicate-scss-are> [filetype1,filetype2,etc]
+fdup <absolute/path/to/directory/where-duplicate-files-are> [filetype1,filetype2,etc]
 ```
 
 </br>
 Example:
 
 ```
-fdup ~/some-file  css,scss
-
-
-
-```
-
-</br>
-
-cd directory
-
-npm start <absolute/path/to/directory/where-duplicate-scss-are>
-
-```
+fdup ~/some-directory  css,scss
 
 ```
