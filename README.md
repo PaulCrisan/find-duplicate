@@ -33,7 +33,7 @@ npm link
 use afterwards as:
 
 ```
-fdup <absolute/path/to/directory/where-duplicate-scss-are> [filetype-to-search-for]
+fdup <absolute/path/to/directory/where-duplicate-files-are> [filetype-to-search-for]
 ```
 
 <br/>
