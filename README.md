@@ -1,3 +1,5 @@
+<b>Find files with same content recursively inside a directory</b>
+
 Min node version needed is ^6
 
 </br>
@@ -17,9 +19,7 @@ npm install -g ./
 
 ```
 
-</br>
 or
-</br>
 
 ```
 cd cloned-directory
@@ -38,10 +38,10 @@ fdup <absolute/path/to/directory/where-duplicate-scss-are> [filetype-to-search-f
 
 <br/>
 
-or if you want to search for multiple files:
+or if you want to search for multiple files (no space between multiple file types):
 
 ```
-fdup <absolute/path/to/directory/where-duplicate-scss-are> [filetype1, filetype2, etc]
+fdup <absolute/path/to/directory/where-duplicate-scss-are> [filetype1,filetype2,etc]
 ```
 
 </br>
@@ -50,9 +50,11 @@ Example:
 ```
 fdup ~/some-file  css,scss
 
-</br>
+
 
 ```
+
+</br>
 
 cd directory
 
