@@ -2,10 +2,15 @@
   "name": "check-duplicates",
   "version": "1.0.0",
   "description": "",
+  "main": "index.js",
+  "bin": {
+    "fdup": "cli.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
   "author": "PC",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {}
 }

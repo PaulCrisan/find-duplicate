@@ -2,19 +2,35 @@ const fs = require("fs");
 const crypto = require("crypto");
 const path = require("path");
 
-if (process.argv.length <= 2) {
-  console.log("Usage: " + __filename + " path/to/directory");
-  process.exit(0);
-}
+const checkArgs = (args) => {
+  if (args.length == 0) {
+    console.log("Please provide path to search under");
+    process.exit(0);
+  }
 
-const PATH = path.normalize(process.argv[2]);
+  if (args.length > 1) {
+    try {
+      fs.statSync(args[0]);
+    } catch (err) {
+      if (err.code === "ENOENT") {
+        console.log(
+          "File or directory does not exist or first argument was not a path"
+        );
+        process.exit(0);
+      }
+    }
+  } else {
+    console.log("No filetype argument");
+    process.exit(0);
+  }
 
-var walkSync = function (dir, filelist) {
-  var path = path || require("path");
-  var fs = fs || require("fs"),
-    files = fs.readdirSync(dir);
+  return args;
+};
+
+const walkSync = (dir, filelist) => {
+  const files = fs.readdirSync(dir);
   filelist = filelist || [];
-  files.forEach(function (file) {
+  files.map((file) => {
     if (fs.statSync(path.join(dir, file)).isDirectory()) {
       filelist = walkSync(path.join(dir, file), filelist);
     } else {
@@ -23,8 +39,6 @@ var walkSync = function (dir, filelist) {
   });
   return filelist;
 };
-
-const scssArray = walkSync(PATH).filter((fn) => fn.endsWith(".scss"));
 
 const readFile = (filename) => {
   var contents = fs.readFileSync(filename);
@@ -37,15 +51,35 @@ const makeHash = (fileString) => {
 
 const createAsoc = (fileListArray) => {
   let asoc = [];
-  fileListArray.map((scss) => {
-    asoc.push({ path: scss, hash: makeHash(readFile(scss)) });
+  fileListArray.map((f) => {
+    asoc.push({ path: f, hash: makeHash(readFile(f)) });
   });
 
   return asoc;
 };
 
+const endsWithAny = (suffixes, string) => {
+  return suffixes.some((suffix) => {
+    return string.endsWith(suffix);
+  });
+};
+
 const getResult = () => {
-  const asoc = createAsoc(scssArray);
+  const args = checkArgs(process.argv.slice(2));
+
+  const filteredArray =
+    args[1].split(",").length > 1
+      ? walkSync(args[0]).filter((fn) => {
+          return endsWithAny(
+            args[1].split(",").map((a) => "." + a),
+            fn
+          );
+        })
+      : walkSync(args[0]).filter((fn) => {
+          return fn.endsWith("." + args[1]);
+        });
+
+  const asoc = createAsoc(filteredArray);
 
   const uniqueHash = Array.from(new Set(asoc.map((a) => a.hash)));
 
@@ -83,10 +117,7 @@ const getResult = () => {
 
   flag
     ? ""
-    : console.log(
-        "\x1b[36m%s\x1b[0m",
-        "No duplicate files found, yay!"
-      );
+    : console.log("\x1b[36m%s\x1b[0m", "No duplicate files found, yay!");
 };
 
-getResult();
+module.exports.getResult = getResult;
