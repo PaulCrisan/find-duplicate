@@ -70,7 +70,7 @@ const getResult = () => {
 
       console.log(
         "\x1b[36m%s\x1b[0m",
-        "Fisierele duplicat si locul lor sunt: \n"
+        "Duplicate files and their location: \n"
       );
 
       el.map((e) => {
@@ -85,7 +85,7 @@ const getResult = () => {
     ? ""
     : console.log(
         "\x1b[36m%s\x1b[0m",
-        "Nu sunt fisiere duplicat in acest fisier"
+        "No duplicate files found, yay!"
       );
 };
 
