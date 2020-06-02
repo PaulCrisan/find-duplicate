@@ -1,4 +1,4 @@
-<b>Find files with same content recursively inside a directory</b>
+<b>Find files with same content recursively inside a parent directory</b>
 
 Min node version needed is ^6
 
